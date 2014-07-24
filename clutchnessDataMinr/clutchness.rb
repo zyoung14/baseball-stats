@@ -37,14 +37,19 @@ CSV.open('scatter_plot.csv', 'w',
 	end
 end
 
-# #calculate team off and def efficiency ratings for first half of 2014
-# CSV.open('2014_results.csv', 'w', 
-# 	:write_headers=> true,
-# 	:headers => ["Team", "Offensive Clutch", "Defensive Clutch", "Total Clutch"]
-# 	) do |writer|
-
-# 	year1 = (CSV.read("Stat_Bank/2005Off.csv")[1 .. -1]).zip(CSV.read("Stat_Bank/2005Def.csv")[1 .. -1])
-# 	year1.each do |team_off, team_def|
-# 	#data goes here
-# 	end
-# end	
+#calculate win projections for each team
+ CSV.open('2014_results.csv', 'w', 
+	:write_headers=> true,
+	:headers => ["Team", "Wins"]
+	) do |writer|
+ 		
+ 		OFFENSE.zip(DEFENSE).each do |team_off, team_def|
+ 			games = team_def[3].to_f
+ 			rs = (162/games - 1) * off_compute_efficiency(team_off) * team_off[7].to_f / OFFENSIVE_EFFICEINCY
+ 			ra = (162/games - 1) * def_compute_efficiency(team_def) * team_def[6].to_f / DEFENSIVE_EFFICEINCY
+ 			exp = ((rs + ra)/(162 - games))**0.287
+ 			win_total = WINS INITIAL + (162 - games) * (1/(1 + (ra/rs)**exp))
+ 			writer << [team_off[0], win_total]
+		end
+ 	end
+ end
