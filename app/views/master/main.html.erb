@@ -3,8 +3,36 @@
 <!-- Credit to Grouper -->
 
 <html>
+
+<style>
+
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: white;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  stroke: white;
+  fill:none;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 28px;
+  pointer-events: none;
+}
+</style>
+
 <head>
-<title>Baseball n Luck</title>
+<title>Baseball & Luck</title>
 
 </head>
 
@@ -98,6 +126,113 @@ Sequences
 <div class="row default-row"></div>
 </div>
 </div>
+
+<div class="graph">
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 720 - margin.left - margin.right,
+    height = 660 - margin.top - margin.bottom;
+
+/* 
+ * value accessor - returns the value to encode for a given data object.
+ * scale - maps value to a visual display encoding, such as a pixel position.
+ * map function - maps from data value to display value
+ * axis - sets up axis
+ */ 
+
+// setup x 
+var xValue = function(d) { return d.Year1;}, // data -> value
+    xScale = d3.scale.linear().range([0, width]), // value -> display
+    xMap = function(d) { return xScale(xValue(d));}, // data -> display
+    xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+
+// setup y
+var yValue = function(d) { return d.Year2;}, // data -> value
+    yScale = d3.scale.linear().range([height, 0]), // value -> display
+    yMap = function(d) { return yScale(yValue(d));}, // data -> display
+    yAxis = d3.svg.axis().scale(yScale).orient("left");
+
+// add the graph canvas to the body of the webpage
+var svg = d3.select(".graph").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// add the tooltip area to the webpage
+var tooltip = d3.select(".graph").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+// load data
+d3.csv("eVals.csv", function(error, data) {
+
+  // change string (from CSV) into number format
+  data.forEach(function(d) {
+    d.Year1 = +d.Year1;
+    d.Year2 = +d.Year2;
+//    console.log(d);
+  });
+
+  // don't want dots overlapping axis, so add in buffer to data domain
+  xScale.domain([d3.min(data, xValue)-.1, d3.max(data, xValue)+.1]);
+  yScale.domain([d3.min(data, yValue)-.1, d3.max(data, yValue)+.1]);
+
+  // x-axis
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + (height/2 + 16) + ")")
+      .call(xAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("x", width)
+      .attr("y", -6)
+      .style("text-anchor", "end")
+      .text("First Year");
+
+  // y-axis
+  svg.append("g")
+      .attr("class", "y axis")
+      .attr("transform", "translate(" + (width/2 - 17) + ",0)")
+      .call(yAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Second Year");
+
+  // draw dots
+  svg.selectAll(".dot")
+      .data(data)
+    .enter().append("circle")
+      .attr("class", "dot")
+      .attr("r", 3.5)
+      .attr("cx", xMap)
+      .attr("cy", yMap)
+      .style("fill", "#54752F") 
+      .on("mouseover", function(d) {
+          tooltip.transition()
+               .duration(200)
+               .style("opacity", .9);
+          tooltip.html(d.Team + "<br/> (" + xValue(d) 
+          + ", " + yValue(d) + ")")
+               .style("left", (d3.event.pageX + 5) + "px")
+               .style("top", (d3.event.pageY - 28) + "px");
+      })
+      .on("mouseout", function(d) {
+          tooltip.transition()
+               .duration(500)
+               .style("opacity", 0);
+      });
+});
+
+</script>
+</div>
+
 
 <div class="row xl-row transparent-bg masked">
 <div class="mask"></div>
