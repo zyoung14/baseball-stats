@@ -62,3 +62,10 @@
 	height: 700px;
 	width: 720;
 }
+
+.btn-primary, .btn-primary:hover {
+	background-color: #54752F;
+	border-width: 2px;
+	border-color: white;
+	border-style: solid;
+}
