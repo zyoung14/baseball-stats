@@ -1,7 +1,7 @@
 require 'csv'
 
 years = *(1993...2013)
-
+# what about SH
 def off_compute_efficiency(arr)
 	singles = arr[8].to_f - (arr[9].to_f + arr[10].to_f + arr[11].to_f)
 	tb = singles + arr[9].to_f * 2 + arr[10].to_f * 3 + arr[11].to_f * 4 + arr[24].to_f + arr[15].to_f + arr[13].to_f - arr[14].to_f
@@ -43,13 +43,20 @@ end
 	:headers => ["Team", "Wins"]
 	) do |writer|
  		
- 		OFFENSE.zip(DEFENSE).each do |team_off, team_def|
- 			games = team_def[3].to_f
- 			rs = (162/games - 1) * off_compute_efficiency(team_off) * team_off[7].to_f / OFFENSIVE_EFFICEINCY
- 			ra = (162/games - 1) * def_compute_efficiency(team_def) * team_def[6].to_f / DEFENSIVE_EFFICEINCY
+ 		offense = CSV.read("Stat_Bank/2014Off.csv")[1 .. -1]
+ 		defense = CSV.read("Stat_Bank/2014Def.csv")[1 .. -1]
+ 		wins = CSV.read("Stat_Bank/2014wins.csv")[1 .. -1]
+
+ 		r_squared_off = 0.14 #update for off and def
+ 		r_squared_def = 0.14
+
+ 		(offense.zip(defense)).zip(wins).each do |team, wins|
+ 			games = team[1][3].to_f
+ 			rs = (162/games - 1) * off_compute_efficiency(team[0]) * team[0][7].to_f / (r_squared_off * TEAM_CLUTCH_LASTYEAR + (1 - r_squared_off) * LEAGUE_AVERAGE CLUTCH)
+ 			ra = (162/games - 1) * def_compute_efficiency(team[1]) * team[1][6].to_f / (r_squared_def * TEAM_CLUTCH_LASTYEAR + (1 - r_squared_def) * LEAGUE_AVERAGE CLUTCH)
  			exp = ((rs + ra)/(162 - games))**0.287
- 			win_total = WINS INITIAL + (162 - games) * (1/(1 + (ra/rs)**exp))
- 			writer << [team_off[0], win_total]
+ 			win_total = wins[4] + (162 - games) * (1/(1 + (ra/rs)**exp))
+ 			writer << [team[0][0], win_total]
 		end
  	end
  end
