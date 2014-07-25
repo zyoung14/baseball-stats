@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function jumpScroll() {
+	window_size = $(window).height();
+   	window.scroll(0,window_size); // horizontal and vertical scroll targets
+}

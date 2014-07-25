@@ -41,6 +41,8 @@
         <div class="container"><br><br><br>
           <div class="row default-row extra-large-headers">
             <div class="col-md-12">
+
+            <br><br><br><br><br>
               <!-- Website main text -->
               <h1>
                 Baseball
@@ -48,7 +50,7 @@
               </h1>
               <h2 class="sub-header">
                 a sabermetric analysis of team efficiency
-              </h2><br><br><br><br><br><br><br>
+              </h2><br><br><br><br><br><br>
             </div>
           </div>
           <div class="row lg-row">
@@ -65,45 +67,51 @@
               Our Predictions
             </button>
           </div>
-
         </div>
       </div>
       <div class="row col-md-12 caption visible-md">
         <div class="col-md-4 col-md-offset-4 center down-arrow">
-          <a href="/">
+          <a href="javascript:jumpScroll(100)">
             <img height="20" id="down-arrow" src="images/down_arrow@2x-d17b06fa174243d82ce8f9753befcfca.png" width="35">
           </a>
         </div>
       </div>
     </div>
-
-    <div class="row light lg-row" id="product_points"><br><br><br><br>
+    <div class="row lg-row lightgrey" id="product_points"><br><br><br><br>
       <div class="container">
+
         <div class="row">
-          <div class="col-md-4 product-point">
-            <h1>Friends &amp; Intro's</h1>
-            <div class="divider"></div>
-            <h3 class="serif sub-header">You and 2 friends join another crew of 3.</h3>
-            <img class="img-responsive default-row" src="images/intro@2x-71524ca0a9287c6005a96da455211189.png">
+
+          <div class="col-md-1 product-point">
+            <h1 class="default-wrap-margin">::</h1>
           </div>
-          <div class="col-md-4 product-point">
-            <h1 class="default-wrap-margin">
-              Drinks
-              <br class="hidden-sm">
-              On us
-            </h1>
+
+          <div class="col-md-3 product-point">
+            <h1>&#931 Bases</h1>
             <div class="divider"></div>
-            <h3 class="serif sub-header">The first round's on us to get things started.</h3>
-            <img class="img-responsive default-row" src="images/pre_game@2x-b77e9bc9db011a179412c7f8d9bbd90e.jpg">
           </div>
-          <div class="col-md-4 product-point">
-            <h1 class="default-wrap-margin">Truths &amp; dares</h1>
+
+          <div class="col-md-1 product-point">
+            <h1 class="default-wrap-margin">&#8660</h1>
+          </div>
+
+          <div class="col-md-3 product-point">
+            <h1 class="default-wrap-margin">&#931 Runs</h1>
             <div class="divider"></div>
-            <h3 class="serif sub-header">Do it for the stories tomorrow morning.</h3>
-            <img class="img-responsive default-row" src="images/dares5-3b62b6a16d22ff9c26027a7fe905d99b.jpg">
+          </div>
+
+          <div class="col-md-1 product-point">
+            <h1 class="default-wrap-margin">&#8660</h1>
+          </div>
+
+          <div class="col-md-3 product-point">
+            <h1 class="default-wrap-margin">&#931 Wins</h1>
+            <div class="divider"></div>
           </div>
         </div>
-      </div><br><br><br><br><br><br><br><br>
+
+        <h3>3 Layers of Performance</h3>
+      </div><br><br><br><br>
     </div>
 
     <div class="row dark-bg lg-row" id="dares_photos">
@@ -169,6 +177,20 @@
       </div>
     </div>
 
+    <div class="row xl-row masked lightgrey">
+      <div class="mediumText">
+        <strong>TB<sup>+</sup><sub>off</sub></strong> =  1B + 2B*2 + 3B*3 + HR*4 + HBP + BB + SB – CS
+        <br>
+        <strong>TB<sup>+</sup><sub>def</sub></strong> =  1B + 2B*2 + 3B*3 + HR*4 + HBP + BB + SB – CS + ROE
+      </div>
+
+      <br><br><br> 
+      <div class="largeText">
+      &#931 TB<sup>+</sup> / Runs = <font color = "#54752F">Efficiency</font>
+      </div>
+
+    </div>
+
     <div class="graph"><br><br><br>
       <h2 style = "color:white"> Persistence of Team Efficiency </h2>
       <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -208,6 +230,13 @@
     var tooltip = d3.select(".graph").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
+
+    var lineFunction = d3.svg.line()
+      .x(function(d) { return d.x; })
+      .y(function(d) { return d.y; })
+      .interpolate("linear");
+
+    var lineData = [{ "x": 40,   "y": height - 40},  { "x": width-70,  "y": 70}];
 
     // load data
     d3.csv("eVals.csv", function(error, data) {
@@ -271,6 +300,12 @@
         .duration(500)
         .style("opacity", 0);
       });
+
+      svg.append("path")
+        .attr("d", lineFunction(lineData))
+        .attr("stroke", "white");
+
+
     });
 
       </script>

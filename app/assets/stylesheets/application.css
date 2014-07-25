@@ -37,7 +37,7 @@
 .axis text {
   stroke: white;
   fill: white;
-  font-family: sans-serif;
+  font-family: Arial;
 }
 
 .dot {
@@ -75,6 +75,12 @@
   pointer-events: none;
   color: white;
 }
+
+.graph{
+	height: 700px;
+	width: 720;
+}
+
 /*end for graph styling*/
 
 #sadPic {
@@ -82,16 +88,27 @@
 	margin-left: 15px; 
 }
 
-.graph{
-	height: 700px;
-	width: 720;
+.lightgrey{
+	background-color: #D3D3D3;
+}
+
+.lightgrey2{
+	background-color: #bdbdbd;
+}
+
+.mediumText{
+	font-size: 30px;
+}
+
+.largeText{
+	font-size: 60px;
 }
 
 .method {
 	margin-left: auto;
     margin-right: auto;
     max-width: 800px;
-    background-color: black;
+    /*background-color: black;*/
 }
 .btn-primary, .btn-primary:hover {
 	background-color: #54752F;
