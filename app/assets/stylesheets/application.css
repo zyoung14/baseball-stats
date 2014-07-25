@@ -88,10 +88,10 @@
 
 /*end for graph styling*/
 
-#sadPic {
+/*#sadPic {
 	max-height: 336px;
 	margin-left: 15px; 
-}
+}*/
 
 .lightgrey{
 	background-color: #D3D3D3;
@@ -118,6 +118,15 @@
 .btn-primary, .btn-primary:hover {
 	background-color: #54752F;
 	border: 2px solid white;
+}
+
+.footerText {
+	color: #727272;
+	text-transform: uppercase;
+	font-family: "Gotham SSm A", "Gotham SSm B", Helvetica, sans-serif;
+	font-weight: 700;
+	font-size: 10px;
+	letter-spacing: 1.6px;
 }
 
 .special {
