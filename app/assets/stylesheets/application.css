@@ -40,6 +40,11 @@
   font-family: Arial;
 }
 
+.rsquaredVal {
+	stroke: white;
+	fill: white;
+}
+
 .dot {
   stroke: #032;
 }
