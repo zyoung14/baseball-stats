@@ -29,9 +29,12 @@ CSV.open('scatter_plot.csv', 'w',
 	years.each do |year|
 		year1 = (CSV.read("Stat_Bank/#{year}Off.csv")[1 .. -1]).zip(CSV.read("Stat_Bank/#{year}Def.csv")[1 .. -1])
 		year2 = (CSV.read("Stat_Bank/#{year+1}Off.csv")[1 .. -1]).zip(CSV.read("Stat_Bank/#{year+1}Def.csv")[1 .. -1])
-		
+		year_1 = (year.to_s)[-2, 2]
+		year_2 = (year + 1).to_s[-2,2]
+		year_both = year_1 + "/" +year_2
+
 		year1.zip(year2).each do |first, second|
-			writer << [first[0][0], net_efficiency(first[1], first[0]), net_efficiency(second[1], second[0]), def_compute_efficiency(first[1]), def_compute_efficiency(second[1]), off_compute_efficiency(first[0]), off_compute_efficiency(second[0])] 
+			writer << [first[0][0]+ " " + year_both, net_efficiency(first[1], first[0]), net_efficiency(second[1], second[0]), def_compute_efficiency(first[1]), def_compute_efficiency(second[1]), off_compute_efficiency(first[0]), off_compute_efficiency(second[0])] 
 		end
 	end
 end
