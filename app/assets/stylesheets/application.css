@@ -87,6 +87,12 @@
 	width: 720;
 }
 
+.method {
+	margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+    background-color: black;
+}
 .btn-primary, .btn-primary:hover {
 	background-color: #54752F;
 	border: 2px solid white;
