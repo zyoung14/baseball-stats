@@ -1,0 +1,28 @@
+<h1 class = "titular">2014 Projected Records</h1>
+<div class="center">
+	<table class = "da-table"> 
+		<% require 'csv' %>
+		<% counter = 0 %>
+		<% @teamarray = CSV.read("2014_results.csv") %>
+		<% @teamarray.each do |team| %>
+			<tr>
+				<% if counter != 0 %>
+					<td><%= counter %></td>
+				<% else %>
+					<td><%= "" %></td>
+				<% end %>
+				<td><%= team[0] %></td>
+				<td><%= team[1] %></td>
+				<td><%= team[2] %></td>
+			</tr>
+			<% counter += 1 %>
+		<% end %>
+	</table>
+	<br><br>
+</div>
+<div class="special">
+    <a class="btn btn-primary btn-lg btn-block" href="/" id="sign_up_button">
+      Home
+    </a>
+</div>
+<br><br>

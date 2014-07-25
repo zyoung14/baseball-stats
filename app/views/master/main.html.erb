@@ -41,6 +41,8 @@
         <div class="container"><br><br><br>
           <div class="row default-row extra-large-headers">
             <div class="col-md-12">
+
+            <br><br><br><br><br>
               <!-- Website main text -->
               <h1>
                 Baseball
@@ -48,7 +50,7 @@
               </h1>
               <h2 class="sub-header">
                 a sabermetric analysis of team efficiency
-              </h2><br><br><br><br><br><br><br>
+              </h2><br><br><br><br><br><br>
             </div>
           </div>
           <div class="row lg-row">
@@ -231,6 +233,13 @@
     .attr("class", "tooltip")
     .style("opacity", 0);
 
+    var lineFunction = d3.svg.line()
+      .x(function(d) { return d.x; })
+      .y(function(d) { return d.y; })
+      .interpolate("linear");
+
+    var lineData = [{ "x": 40,   "y": height - 40},  { "x": width-70,  "y": 70}];
+
     // load data
     d3.csv("eVals.csv", function(error, data) {
 
@@ -293,18 +302,24 @@
         .duration(500)
         .style("opacity", 0);
       });
+
+      svg.append("path")
+        .attr("d", lineFunction(lineData))
+        .attr("stroke", "white");
+
+
     });
 
       </script>
     </div>
 
     <div class="row xl-row transparent-bg extra-large-headers">
-      <h1>Say yes.</h1>
+      <h1>2014 Predictions</h1>
       <div class="container">
         <div class="row default-row">
           <div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12">
-            <a class="btn btn-primary btn-lg btn-block" href="/" id="sign_up_button">
-              Predictions
+            <a class="btn btn-primary btn-lg btn-block" href="/predictions" id="sign_up_button">
+              Results
             </a>
           </div>
           <div class="col-md-4 col-xs-12 col-sm-4">

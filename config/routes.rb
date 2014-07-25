@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  match '/predictions',    to: 'static_pages#predictions',    via: 'get'
+  match '/methodology',   to: 'static_pages#methodology',   via: 'get'
+  
   get 'master/main'
 
   # The priority is based upon order of creation: first created -> highest priority.

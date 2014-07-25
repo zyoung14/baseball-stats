@@ -44,6 +44,30 @@
   stroke: #032;
 }
 
+.da-table, tr, td {
+	border: 1px solid black;
+	text-align: center;
+	padding: 5px;
+	margin: 2px;
+	background-color: white;
+	color: #54752F;
+}
+
+
+.da-table {
+	margin-left: auto;
+	margin-right: auto;
+	width: 400px;
+	border: 3px solid black;
+
+}
+
+.titular {
+	padding: 20px;
+	color: #54752F;
+	text-align: center;
+}
+
 .tooltip {
   position: absolute;
   width: 200px;
@@ -82,7 +106,12 @@
 
 .btn-primary, .btn-primary:hover {
 	background-color: #54752F;
-	border-width: 2px;
-	border-color: white;
-	border-style: solid;
+	border: 2px solid white;
+}
+
+.special {
+ 	margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    background-color: #54752F;
 }
