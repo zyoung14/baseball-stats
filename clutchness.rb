@@ -72,3 +72,32 @@ CSV.open('2014_results.csv', 'w',
  		writer << a
  	end
 end
+
+
+# CSV.open('2008_results.csv', 'w', 
+# 	:write_headers=> true,
+# 	:headers => ["Team", "Wins", "Losses"]
+# 	) do |writer|
+ 		
+# 	r_squared = [0.25162, 0.262] 
+# 	league_average_efficiency = [3.912,4.012]
+
+# 	(CSV.read("Stat_Bank/2007Off.csv")[1 .. -1]).zip(CSV.read("Stat_Bank/2007Def.csv")[1 .. -1]).each do |team_off, team_def|
+# 		rs = (162) * off_compute_efficiency(team_off) * team_off[7].to_f / (r_squared[0] * off_compute_efficiency(team_off) + (1 - r_squared[0]) * league_average_efficiency[0])
+# 		ra = (162) * def_compute_efficiency(team_def) * team_def[6].to_f / (r_squared[1] * def_compute_efficiency(team_def) + (1 - r_squared[1]) * league_average_efficiency[1])
+# 		exp = ((rs + ra)/(162))**0.287
+# 		win_total = (162) * (1/(1 + (ra/rs) ** exp))
+# 		writer << [team_off[0], win_total, (162 - win_total)]
+# 	end
+# end
+
+# a_of_a = (CSV.read("2008_results.csv")[1 .. -1]).sort_by { |c| c[2] }
+# CSV.open('2014_results.csv', 'w', 
+# 	:write_headers=> true,
+# 	:headers => ["Team", "Wins", "Losses"]
+# 	) do |writer|
+ 	
+#  	a_of_a.each do |a|
+#  		writer << a
+#  	end
+# end
