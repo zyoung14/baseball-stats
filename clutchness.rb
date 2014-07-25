@@ -1,7 +1,7 @@
 require 'csv'
 
 years = *(1993...2013)
-# what about SH & 	# Way to get year included on scatter plot? i.e. "11/12"
+# what about Sacrifice Bunts?
 def off_compute_efficiency(arr)
 	singles = arr[8].to_f - (arr[9].to_f + arr[10].to_f + arr[11].to_f)
 	tb = singles + arr[9].to_f * 2 + arr[10].to_f * 3 + arr[11].to_f * 4 + arr[24].to_f + arr[15].to_f + arr[13].to_f - arr[14].to_f
