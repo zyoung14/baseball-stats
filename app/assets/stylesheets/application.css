@@ -58,7 +58,9 @@
 	color: #54752F;
 }
 
-
+a:hover{
+	text-decoration: none;
+}
 .da-table {
 	margin-left: auto;
 	margin-right: auto;
